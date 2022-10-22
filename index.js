@@ -12,30 +12,37 @@ const news = require('./data/news.json')
 
 
 
-
+// Testing the api
 app.get('/', (req, res) => {
     res.send("server is running now- okay . thank you ?? ")
 })
 
+
+
+// All news loader
+app.get('/news', (req, res) => {
+    res.send(news)
+})
+
+
+// News categories List
 app.get('/news-categories', (req, res) => {
     res.send(categories)
 })
 
-
+// Category Wise News List
 app.get('/category/:id', (req, res) => {
     const id = req.params.id;
-    if( id === 08){
+    if( id === '08') {
         res.send(news)
     }
     else{
         const category_news = news.filter( n => n.category_id === id) 
         res.send(category_news)
     }
-
-  
 })
 
-
+// News Details with News ID
 app.get('/news/:id', (req, res) => {
     const id  = req.params.id
     const selectedNews = news.find(n => n._id === id)
